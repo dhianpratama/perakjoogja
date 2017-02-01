@@ -1,0 +1,60 @@
+<div class="page-breadcrumb">
+  <ol class="breadcrumb container">
+    <li><a href="index.html">Home</a></li>
+    <li>Master Data</li>
+    <li>Product</li>
+  </ol>
+</div>
+<div class="page-title">
+  <div class="container">
+    <h3>Product Data</h3>
+  </div>
+</div>
+<div id="main-wrapper" class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-white">
+        <div class="panel-heading clearfix">
+          <h4>Product Form</h4>
+        </div>
+        <div class="panel-body">
+          <form class="form-horizontal" name="productForm" ng-submit="vm.save(productForm.$valid)" novalidate>
+            <div class="box-body">
+              <div ng-if="vm.alerts" class="alert alert-{{alert.type}}" ng-repeat="alert in vm.alerts">
+                <h4>{{alert.title}}</h4>
+                <p>{{alert.msg}}</p>
+              </div>
+              <div class="form-group" ng-class="{ 'has-error': productForm.code.$invalid && ( vm.formSubmitted || productForm.code.$touched) }">
+                <label for="inputEmail3" class="col-sm-2 control-label">Kode Barang</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="vm.data.code" name="name" placeholder="Name" required>
+                  <p ng-show="productForm.code.$error.required && ( vm.formSubmitted || productForm.code.$touched)" class="help-block">Kode wajid diisi.</p>
+                </div>
+              </div>
+              <div class="form-group" ng-class="{ 'has-error': productForm.description.$invalid && ( vm.formSubmitted || productForm.description.$touched) }">
+                <label for="inputEmail3" class="col-sm-2 control-label">Deskripsi Barang</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="vm.data.description" name="description" placeholder="Description" required>
+                  <p ng-show="productForm.description.$error.required && ( vm.formSubmitted || productForm.description.$touched)" class="help-block">Deskripsi wajid diisi.</p>
+                </div>
+              </div>
+              <div class="form-group" ng-class="{ 'has-error': productForm.organizer_id.$invalid && ( vm.formSubmitted || productForm.organizer_id.$touched) }">
+                <label for="inputEmail3" class="col-sm-2 control-label">Tipe Barang</label>
+                <div class="col-sm-10">
+                  <select ng-options="t as t for t in vm.types" ng-model="vm.data.type" class="form-control" name="type" required>
+                  <option value="">-- Pilih Tipe Barang --</option>
+                </select>
+                  <p ng-show="productForm.type.$error.required && (vm.formSubmitted || productForm.type.$touched)" class="help-block">Tipe wajid diisi.</p>
+                </div>
+              </div>
+
+            </div>
+            <div class="box-footer">
+              <a ui-sref="app.master-product" class="btn btn-default"><i class="fa fa-angle-double-left"></i> Back</a>
+              <button type="submit" class="btn btn-primary pull-right">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

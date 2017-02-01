@@ -1,0 +1,127 @@
+<!--<div class="page-breadcrumb">
+  <ol class="breadcrumb container">
+    <li><a href="index.html">Home</a></li>
+    <li>Master Data</li>
+    <li>Product</li>
+  </ol>
+</div>-->
+<div class="page-title">
+  <div class="container">
+    <h3>Order Barang Baru</h3>
+  </div>
+</div>
+<div id="main-wrapper" class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-white">
+        <div class="panel-body">
+
+          <uib-tabset active="active">
+            <!--Tab 1 : Personal Info-->
+            <uib-tab index="0">
+              <uib-tab-heading>
+                <i class="fa fa-user"></i> Personal Info
+              </uib-tab-heading>
+              <form class="form-horizontal" name="personalInfoForm" ng-submit="vm.save(personalInfoForm.$valid)" novalidate>
+                <div class="box-body">
+                  <div class="form-group" ng-class="{ 'has-error': personalInfoForm.username.$invalid && ( vm.formSubmitted || personalInfoForm.username.$touched) }">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" ng-model="vm.data.username" name="name" required>
+                      <p ng-show="personalInfoForm.username.$error.required && ( vm.formSubmitted || personalInfoForm.username.$touched)" class="help-block">Username wajid diisi.</p>
+                    </div>
+                  </div>
+                  <div class="form-group" ng-class="{ 'has-error': personalInfoForm.email.$invalid && ( vm.formSubmitted || personalInfoForm.email.$touched) }">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" ng-model="vm.data.email" name="name" required>
+                      <p ng-show="personalInfoForm.email.$error.required && ( vm.formSubmitted || personalInfoForm.email.$touched)" class="help-block">Email wajid diisi.</p>
+                    </div>
+                  </div>
+                  <div class="form-group" ng-class="{ 'has-error': personalInfoForm.name.$invalid && ( vm.formSubmitted || personalInfoForm.name.$touched) }">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Nama Pemesan</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" ng-model="vm.data.name" name="name" required>
+                      <p ng-show="personalInfoForm.name.$error.required && ( vm.formSubmitted || personalInfoForm.name.$touched)" class="help-block">Nama wajid diisi.</p>
+                    </div>
+                  </div>
+                  <div class="form-group" ng-class="{ 'has-error': personalInfoForm.phone.$invalid && ( vm.formSubmitted || personalInfoForm.phone.$touched) }">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Telp</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" ng-model="vm.data.phone" name="name" required>
+                      <p ng-show="personalInfoForm.phone.$error.required && ( vm.formSubmitted || personalInfoForm.phone.$touched)" class="help-block">Telp wajid diisi.</p>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Line</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" ng-model="vm.data.line" name="name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">BBM</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" ng-model="vm.data.bbm" name="name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Instagram</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" ng-model="vm.data.instagram" name="name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Agama</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" ng-model="vm.data.religion" name="name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Alamat</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" ng-model="vm.data.address" name="name">
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </uib-tab>
+
+
+            <!--Tab 2 : Detail Product-->
+            <uib-tab index="1" heading="Detail Barang">
+              <uib-tab-heading>
+                <i class="fa fa-diamond"></i> Detail Barang
+              </uib-tab-heading>
+              <form class="form-horizontal" name="personalInfoForm" ng-submit="vm.save(personalInfoForm.$valid)" novalidate>
+                <div class="box-body">
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Kode Barang</label>
+                    <div class="col-sm-10">
+                      <angucomplete placeholder="Search Product" pause="100" selectedobject="vm.selectedProduct" localdata="vm.products" searchfields="code,description"
+                        titlefield="code" minlength="1" inputclass="form-control form-control-small" />
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </uib-tab>
+
+
+            <!--Tab 3 : Shipping-->
+            <uib-tab index="2" heading="Shipping">
+              <uib-tab-heading>
+                <i class="fa fa-truck"></i> Personal Info
+              </uib-tab-heading>
+              <div class="col-sm-10">
+                <div class="checkbox">
+                  <label>
+                    <div class="checker"><span><input type="checkbox"></span></div>Unchecked
+                 </label>
+                </div>
+              </div>
+            </uib-tab>
+          </uib-tabset>
+
+        </div>
+      </div>
+    </div>
+  </div>
