@@ -30,6 +30,8 @@ $api->group(['middleware' => ['api']], function ($api) {
     $api->post('auth/password/email', 'Auth\PasswordResetController@sendResetLinkEmail');
     $api->get('auth/password/verify', 'Auth\PasswordResetController@verify');
     $api->post('auth/password/reset', 'Auth\PasswordResetController@reset');
+
+    $api->controller('product', 'ProductController');
 });
 
 $api->group(['middleware' => ['api', 'api.auth']], function ($api) {
@@ -39,5 +41,5 @@ $api->group(['middleware' => ['api', 'api.auth']], function ($api) {
 
 $api->group(['middleware' => ['api', 'api.auth', 'role:admin.super|admin.user']], function ($api) {
     $api->controller('users', 'UserController');
-    $api->controller('product', 'ProductController');
+    
 });

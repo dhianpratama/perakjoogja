@@ -99,6 +99,9 @@
                     <div class="col-sm-10">
                       <angucomplete placeholder="Search Product" pause="100" selectedobject="vm.selectedProduct" localdata="vm.products" searchfields="code,description"
                         titlefield="code" minlength="1" inputclass="form-control form-control-small" />
+                        <div>
+                          <h4 ng-if="vm.selectedProduct!=null">Anda memesan : {{ vm.selectedProduct.type }} - {{ vm.selectedProduct.code }}</h4>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -111,13 +114,21 @@
               <uib-tab-heading>
                 <i class="fa fa-truck"></i> Personal Info
               </uib-tab-heading>
-              <div class="col-sm-10">
-                <div class="checkbox">
-                  <label>
-                    <div class="checker"><span><input type="checkbox"></span></div>Unchecked
-                 </label>
+              <form class="form-horizontal" name="shippingForm" ng-submit="vm.save(personalInfoForm.$valid)" novalidate>
+                <div class="box-body">
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Kode Barang</label>
+                    <div class="col-sm-10">
+                      <div style="margin-top: 10px;">
+                        <input type="checkbox" /><span>&nbsp;JNE</span>
+                      </div>
+                      <div>
+                        <input type="checkbox" /><span>&nbsp;POS</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </form>
             </uib-tab>
           </uib-tabset>
 
