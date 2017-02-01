@@ -792,16 +792,44 @@ module.run(['$templateCache', function($templateCache) {
     '              <uib-tab-heading>\n' +
     '                <i class="fa fa-diamond"></i> Detail Barang\n' +
     '              </uib-tab-heading>\n' +
-    '              <form class="form-horizontal" name="personalInfoForm" ng-submit="vm.save(personalInfoForm.$valid)" novalidate>\n' +
+    '              <form class="form-horizontal" name="detailForm" ng-submit="vm.save(personalInfoForm.$valid)" novalidate>\n' +
     '                <div class="box-body">\n' +
     '                  <div class="form-group">\n' +
     '                    <label for="inputEmail3" class="col-sm-2 control-label">Kode Barang</label>\n' +
     '                    <div class="col-sm-10">\n' +
-    '                      <angucomplete placeholder="Search Product" pause="100" selectedobject="vm.selectedProduct" localdata="vm.products" searchfields="code,description"\n' +
+    '                      <angucomplete placeholder="Search Product" pause="100" selectedobject="vm.selectedProduct" localdata="vm.products" searchfields="code"\n' +
     '                        titlefield="code" minlength="1" inputclass="form-control form-control-small" />\n' +
-    '                        <div>\n' +
-    '                          <h4 ng-if="vm.selectedProduct!=null">Anda memesan : {{ vm.selectedProduct.type }} - {{ vm.selectedProduct.code }}</h4>\n' +
-    '                        </div>\n' +
+    '                      <div>\n' +
+    '                        <h4 ng-if="vm.selectedProduct!=null">Anda memesan : {{ vm.selectedProduct.originalObject.type }} - {{ vm.selectedProduct.originalObject.code\n' +
+    '                          }}\n' +
+    '                        </h4>\n' +
+    '                      </div>\n' +
+    '                    </div>\n' +
+    '                  </div>\n' +
+    '                  <div ng-if="vm.selectedProduct.originalObject.type===\'Cincin\'">\n' +
+    '                    <div class="form-group">\n' +
+    '                      <label for="inputEmail3" class="col-sm-2 control-label">Tipe Barang</label>\n' +
+    '                      <div class="col-sm-10">\n' +
+    '                        <select ng-options="t as t for t in vm.ringTypes" ng-model="vm.data.ringType" class="form-control" name="type" required>\n' +
+    '                                <option value="">-- Pilih Tipe Cincin --</option>\n' +
+    '                              </select>\n' +
+    '                      </div>\n' +
+    '                    </div>\n' +
+    '                    <div class="form-group" ng-if="vm.data.ringType===\'Couple\' || vm.data.ringType===\'Single Pria\' ">\n' +
+    '                      <label for="inputEmail3" class="col-sm-2 control-label">Bahan Pria</label>\n' +
+    '                      <div class="col-sm-10">\n' +
+    '                        <select ng-options="t as t for t in vm.materials" ng-model="vm.data.type" class="form-control" name="type" required>\n' +
+    '                                <option value="">-- Pilih Bahan Pria --</option>\n' +
+    '                              </select>\n' +
+    '                      </div>\n' +
+    '                    </div>\n' +
+    '                    <div class="form-group" ng-if="vm.data.ringType===\'Couple\' || vm.data.ringType===\'Single Wanita\' ">\n' +
+    '                      <label for="inputEmail3" class="col-sm-2 control-label">Bahan Wanita</label>\n' +
+    '                      <div class="col-sm-10">\n' +
+    '                        <select ng-options="t as t for t in vm.materials" ng-model="vm.data.type" class="form-control" name="type" required>\n' +
+    '                                <option value="">-- Pilih Bahan Wanita --</option>\n' +
+    '                              </select>\n' +
+    '                      </div>\n' +
     '                    </div>\n' +
     '                  </div>\n' +
     '                </div>\n' +
@@ -820,22 +848,22 @@ module.run(['$templateCache', function($templateCache) {
     '                    <label for="inputEmail3" class="col-sm-2 control-label">Kurir</label>\n' +
     '                    <div class="col-sm-10">\n' +
     '                      <div style="margin-top: 10px;">\n' +
-    '                        <input type="checkbox" /><span>&nbsp;JNE</span>\n' +
-    '                      </div>\n' +
-    '                      <div>\n' +
-    '                        <input type="checkbox" /><span>&nbsp;POS</span>\n' +
-    '                      </div>\n' +
-    '                    </div>\n' +
-    '                  </div>\n' +
-    '                </div>\n' +
-    '              </form>\n' +
-    '            </uib-tab>\n' +
-    '          </uib-tabset>\n' +
+    '<input type="checkbox" /><span>&nbsp;JNE</span>\n' +
+    '</div>\n' +
+    '<div>\n' +
+    '  <input type="checkbox" /><span>&nbsp;POS</span>\n' +
+    '</div>\n' +
+    '</div>\n' +
+    '</div>\n' +
+    '</div>\n' +
+    '</form>\n' +
+    '</uib-tab>\n' +
+    '</uib-tabset>\n' +
     '\n' +
-    '        </div>\n' +
-    '      </div>\n' +
-    '    </div>\n' +
-    '  </div>');
+    '</div>\n' +
+    '</div>\n' +
+    '</div>\n' +
+    '</div>');
 }]);
 })();
 
@@ -6609,42 +6637,6 @@ try {
   module = angular.module('app.partials', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('./views/app/components/category/category-list/category-list.component.html',
-    '<section class="content-header">\n' +
-    '  <h1>Category <small></small></h1>\n' +
-    '  <ol class="breadcrumb">\n' +
-    '    <li><a ui-sref="app.landing"><i class="fa fa-dashboard"></i> Home</a></li>\n' +
-    '    <li class="active">Category List</li>\n' +
-    '  </ol>\n' +
-    '</section>\n' +
-    '<section class="content">\n' +
-    '  <div class="row">\n' +
-    '    <div class="col-md-12">\n' +
-    '      <div class="box box-info">\n' +
-    '        <div class="box-header with-border">\n' +
-    '          <h3 class="box-title">Category List</h3>\n' +
-    '          <div class="box-tools pull-right">\n' +
-    '            <a ui-sref="app.categoryform" class="btn btn-block btn-primary btn-sm"><i class="fa fa-plus"></i> Add New</a>\n' +
-    '          </div>\n' +
-    '        </div>\n' +
-    '        <div class="box-body">\n' +
-    '          <table datatable="" width="100%" class="table table-striped table-bordered" ng-if="vm.displayTable" dt-options="vm.dtOptions" dt-columns="vm.dtColumns"></table>\n' +
-    '        </div>\n' +
-    '      </div>\n' +
-    '    </div>\n' +
-    '  </div>\n' +
-    '</section>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('app.partials');
-} catch (e) {
-  module = angular.module('app.partials', []);
-}
-module.run(['$templateCache', function($templateCache) {
   $templateCache.put('./views/app/components/category/category-form/category-form.component.html',
     '<section class="content-header">\n' +
     '  <h1>Category Form <small></small></h1>\n' +
@@ -6687,6 +6679,42 @@ module.run(['$templateCache', function($templateCache) {
     '            <button type="submit" class="btn btn-primary pull-right">Save</button>\n' +
     '          </div>\n' +
     '        </form>\n' +
+    '      </div>\n' +
+    '    </div>\n' +
+    '  </div>\n' +
+    '</section>\n' +
+    '');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('app.partials');
+} catch (e) {
+  module = angular.module('app.partials', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('./views/app/components/category/category-list/category-list.component.html',
+    '<section class="content-header">\n' +
+    '  <h1>Category <small></small></h1>\n' +
+    '  <ol class="breadcrumb">\n' +
+    '    <li><a ui-sref="app.landing"><i class="fa fa-dashboard"></i> Home</a></li>\n' +
+    '    <li class="active">Category List</li>\n' +
+    '  </ol>\n' +
+    '</section>\n' +
+    '<section class="content">\n' +
+    '  <div class="row">\n' +
+    '    <div class="col-md-12">\n' +
+    '      <div class="box box-info">\n' +
+    '        <div class="box-header with-border">\n' +
+    '          <h3 class="box-title">Category List</h3>\n' +
+    '          <div class="box-tools pull-right">\n' +
+    '            <a ui-sref="app.categoryform" class="btn btn-block btn-primary btn-sm"><i class="fa fa-plus"></i> Add New</a>\n' +
+    '          </div>\n' +
+    '        </div>\n' +
+    '        <div class="box-body">\n' +
+    '          <table datatable="" width="100%" class="table table-striped table-bordered" ng-if="vm.displayTable" dt-options="vm.dtOptions" dt-columns="vm.dtColumns"></table>\n' +
+    '        </div>\n' +
     '      </div>\n' +
     '    </div>\n' +
     '  </div>\n' +
@@ -7164,42 +7192,6 @@ try {
   module = angular.module('app.partials', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('./views/app/components/organizer/organizer-list/organizer-list.component.html',
-    '<section class="content-header">\n' +
-    '  <h1>Organizer <small></small></h1>\n' +
-    '  <ol class="breadcrumb">\n' +
-    '    <li><a ui-sref="app.landing"><i class="fa fa-dashboard"></i> Home</a></li>\n' +
-    '    <li class="active">Organizer List</li>\n' +
-    '  </ol>\n' +
-    '</section>\n' +
-    '<section class="content">\n' +
-    '  <div class="row">\n' +
-    '    <div class="col-md-12">\n' +
-    '      <div class="box box-info">\n' +
-    '        <div class="box-header with-border">\n' +
-    '          <h3 class="box-title">Organizer List</h3>\n' +
-    '          <div class="box-tools pull-right">\n' +
-    '            <a ui-sref="app.organizerform" class="btn btn-block btn-primary btn-sm"><i class="fa fa-plus"></i> Add New</a>\n' +
-    '          </div>\n' +
-    '        </div>\n' +
-    '        <div class="box-body">\n' +
-    '          <table datatable="" width="100%" class="table table-striped table-bordered" ng-if="vm.displayTable" dt-options="vm.dtOptions" dt-columns="vm.dtColumns"></table>\n' +
-    '        </div>\n' +
-    '      </div>\n' +
-    '    </div>\n' +
-    '  </div>\n' +
-    '</section>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('app.partials');
-} catch (e) {
-  module = angular.module('app.partials', []);
-}
-module.run(['$templateCache', function($templateCache) {
   $templateCache.put('./views/app/components/product/product-form/product-form.component.html',
     '<div class="page-title">\n' +
     '  <div class="container">\n' +
@@ -7254,6 +7246,42 @@ module.run(['$templateCache', function($templateCache) {
     '      </div>\n' +
     '    </div>\n' +
     '  </div>');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('app.partials');
+} catch (e) {
+  module = angular.module('app.partials', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('./views/app/components/organizer/organizer-list/organizer-list.component.html',
+    '<section class="content-header">\n' +
+    '  <h1>Organizer <small></small></h1>\n' +
+    '  <ol class="breadcrumb">\n' +
+    '    <li><a ui-sref="app.landing"><i class="fa fa-dashboard"></i> Home</a></li>\n' +
+    '    <li class="active">Organizer List</li>\n' +
+    '  </ol>\n' +
+    '</section>\n' +
+    '<section class="content">\n' +
+    '  <div class="row">\n' +
+    '    <div class="col-md-12">\n' +
+    '      <div class="box box-info">\n' +
+    '        <div class="box-header with-border">\n' +
+    '          <h3 class="box-title">Organizer List</h3>\n' +
+    '          <div class="box-tools pull-right">\n' +
+    '            <a ui-sref="app.organizerform" class="btn btn-block btn-primary btn-sm"><i class="fa fa-plus"></i> Add New</a>\n' +
+    '          </div>\n' +
+    '        </div>\n' +
+    '        <div class="box-body">\n' +
+    '          <table datatable="" width="100%" class="table table-striped table-bordered" ng-if="vm.displayTable" dt-options="vm.dtOptions" dt-columns="vm.dtColumns"></table>\n' +
+    '        </div>\n' +
+    '      </div>\n' +
+    '    </div>\n' +
+    '  </div>\n' +
+    '</section>\n' +
+    '');
 }]);
 })();
 
@@ -7597,42 +7625,6 @@ try {
   module = angular.module('app.partials', []);
 }
 module.run(['$templateCache', function($templateCache) {
-  $templateCache.put('./views/app/components/vacancy/vacancy-list/vacancy-list.component.html',
-    '<section class="content-header">\n' +
-    '  <h1>Vacancy <small></small></h1>\n' +
-    '  <ol class="breadcrumb">\n' +
-    '    <li><a ui-sref="app.landing"><i class="fa fa-dashboard"></i> Home</a></li>\n' +
-    '    <li class="active">Vacancy List</li>\n' +
-    '  </ol>\n' +
-    '</section>\n' +
-    '<section class="content">\n' +
-    '  <div class="row">\n' +
-    '    <div class="col-md-12">\n' +
-    '      <div class="box box-info">\n' +
-    '        <div class="box-header with-border">\n' +
-    '          <h3 class="box-title">Vacancy List</h3>\n' +
-    '          <div class="box-tools pull-right">\n' +
-    '            <a ui-sref="app.vacancyform" class="btn btn-block btn-primary btn-sm"><i class="fa fa-plus"></i> Add New</a>\n' +
-    '          </div>\n' +
-    '        </div>\n' +
-    '        <div class="box-body">\n' +
-    '          <table datatable="" width="100%" class="table table-striped table-bordered" ng-if="vm.displayTable" dt-options="vm.dtOptions" dt-columns="vm.dtColumns"></table>\n' +
-    '        </div>\n' +
-    '      </div>\n' +
-    '    </div>\n' +
-    '  </div>\n' +
-    '</section>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try {
-  module = angular.module('app.partials');
-} catch (e) {
-  module = angular.module('app.partials', []);
-}
-module.run(['$templateCache', function($templateCache) {
   $templateCache.put('./views/app/components/vacancy-type/vacancy-type-form/vacancy-type-form.component.html',
     '<section class="content-header">\n' +
     '  <h1>Vacancy Type Form <small></small></h1>\n' +
@@ -7675,6 +7667,42 @@ module.run(['$templateCache', function($templateCache) {
     '            <button type="submit" class="btn btn-primary pull-right">Save</button>\n' +
     '          </div>\n' +
     '        </form>\n' +
+    '      </div>\n' +
+    '    </div>\n' +
+    '  </div>\n' +
+    '</section>\n' +
+    '');
+}]);
+})();
+
+(function(module) {
+try {
+  module = angular.module('app.partials');
+} catch (e) {
+  module = angular.module('app.partials', []);
+}
+module.run(['$templateCache', function($templateCache) {
+  $templateCache.put('./views/app/components/vacancy/vacancy-list/vacancy-list.component.html',
+    '<section class="content-header">\n' +
+    '  <h1>Vacancy <small></small></h1>\n' +
+    '  <ol class="breadcrumb">\n' +
+    '    <li><a ui-sref="app.landing"><i class="fa fa-dashboard"></i> Home</a></li>\n' +
+    '    <li class="active">Vacancy List</li>\n' +
+    '  </ol>\n' +
+    '</section>\n' +
+    '<section class="content">\n' +
+    '  <div class="row">\n' +
+    '    <div class="col-md-12">\n' +
+    '      <div class="box box-info">\n' +
+    '        <div class="box-header with-border">\n' +
+    '          <h3 class="box-title">Vacancy List</h3>\n' +
+    '          <div class="box-tools pull-right">\n' +
+    '            <a ui-sref="app.vacancyform" class="btn btn-block btn-primary btn-sm"><i class="fa fa-plus"></i> Add New</a>\n' +
+    '          </div>\n' +
+    '        </div>\n' +
+    '        <div class="box-body">\n' +
+    '          <table datatable="" width="100%" class="table table-striped table-bordered" ng-if="vm.displayTable" dt-options="vm.dtOptions" dt-columns="vm.dtColumns"></table>\n' +
+    '        </div>\n' +
     '      </div>\n' +
     '    </div>\n' +
     '  </div>\n' +

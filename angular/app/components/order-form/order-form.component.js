@@ -23,6 +23,9 @@ class OrderFormController {
 
     this.types = ["Cincin", "Gelang", "Liontin", "Lainnya"];
 
+    this.ringTypes = ["Single Pria", "Single Wanita", "Couple"];
+    this.materials = ["Perak", "Perak Lapis Emas", "Emas", "Emas Putih", "Paladium"];
+
     this.getAllProducts();
   }
 
