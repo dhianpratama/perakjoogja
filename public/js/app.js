@@ -2998,7 +2998,7 @@
 
 	      _this.dtOptions = DTOptionsBuilder.newOptions().withOption('data', dataSet).withOption('createdRow', createdRow).withOption('responsive', true).withBootstrap();
 
-	      _this.dtColumns = [DTColumnBuilder.newColumn(null).withTitle('Actions').withOption('width', '10%').notSortable().renderWith(actionsHtml), DTColumnBuilder.newColumn('code').withTitle('Kode'), DTColumnBuilder.newColumn('description').withTitle('Deskripsi Barang'), DTColumnBuilder.newColumn('type').withTitle('Tipe Barang')];
+	      _this.dtColumns = [DTColumnBuilder.newColumn(null).withTitle('Actions').withOption('width', '15%').notSortable().renderWith(actionsHtml), DTColumnBuilder.newColumn('code').withTitle('Kode'), DTColumnBuilder.newColumn('description').withTitle('Deskripsi Barang'), DTColumnBuilder.newColumn('type').withTitle('Tipe Barang')];
 
 	      _this.displayTable = true;
 	    });

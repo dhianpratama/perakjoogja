@@ -19,7 +19,7 @@ class ProductListController {
 
         this.dtColumns = [
           DTColumnBuilder.newColumn(null).withTitle('Actions')
-            .withOption('width', '10%')
+            .withOption('width', '15%')
             .notSortable()
             .renderWith(actionsHtml),
           DTColumnBuilder.newColumn('code').withTitle('Kode'),
